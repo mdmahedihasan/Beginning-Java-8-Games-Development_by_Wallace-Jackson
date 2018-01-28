@@ -68,4 +68,15 @@ public class GamePiece {
     public void setInvinciBagelMovingType(String movement) {
         movementType = movement;
     }
+
+    public GamePiece() {
+        invinciBagelX = 0;
+        invinciBagelY = 0;
+        bagelOrientation = "side";
+        lifeIndex = 1000;
+        hitsIndex = 0;
+        directionFacing = "E";
+        movementType = "idle";
+        currentlyMoving = false;
+    }
 }
