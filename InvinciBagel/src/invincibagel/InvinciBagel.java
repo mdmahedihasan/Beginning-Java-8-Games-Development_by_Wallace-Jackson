@@ -26,13 +26,14 @@ import javafx.stage.Stage;
  */
 public class InvinciBagel extends Application {
 
-    private Scene scene;
+    Scene scene;
     StackPane root;
-    private Image splashScreen, instructionLayer, legalLayer, scoresLayer;
-    private ImageView splashScreenBackplate, splashScreenTextArea;
-    private Button gameButton, helpButton, scoreButton, legalButton;
-    private HBox buttonContainer;
-    private Insets buttonContainerPadding;
+    Image splashScreen, instructionLayer, legalLayer, scoresLayer;
+    ImageView splashScreenBackplate, splashScreenTextArea;
+    Button gameButton, helpButton, scoreButton, legalButton;
+    HBox buttonContainer;
+    Insets buttonContainerPadding;
+    GamePlayLoop gamePlayLoop;
 
     @Override
     public void start(Stage primaryStage) {
@@ -43,7 +44,7 @@ public class InvinciBagel extends Application {
         gameButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+                //
             }
         });
         helpButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -64,6 +65,9 @@ public class InvinciBagel extends Application {
                 splashScreenTextArea.setImage(legalLayer);
             }
         });
+        
+        gamePlayLoop = new GamePlayLoop();
+        gamePlayLoop.start();
 
     }
 
