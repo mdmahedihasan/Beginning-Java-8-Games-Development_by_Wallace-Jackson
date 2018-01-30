@@ -7,14 +7,13 @@ package invincibagel;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -26,6 +25,8 @@ import javafx.stage.Stage;
  */
 public class InvinciBagel extends Application {
 
+    static final double WIDTH = 640, HEIGHT = 400;
+    boolean up, down, right, left;
     Scene scene;
     StackPane root;
     Image splashScreen, instructionLayer, legalLayer, scoresLayer;
@@ -41,31 +42,24 @@ public class InvinciBagel extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        gameButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //
-            }
+        gameButton.setOnAction((ActionEvent event) -> {
+            splashScreenBackplate.setVisible(false);
+            splashScreenTextArea.setVisible(false);
         });
-        helpButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                splashScreenTextArea.setImage(instructionLayer);
-            }
+        helpButton.setOnAction((ActionEvent event) -> {
+            splashScreenBackplate.setVisible(true);
+            splashScreenTextArea.setVisible(true);
+            splashScreenTextArea.setImage(instructionLayer);
         });
-        scoreButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                splashScreenTextArea.setImage(scoresLayer);
-            }
+        scoreButton.setOnAction((ActionEvent event) -> {
+            splashScreenBackplate.setVisible(true);
+            splashScreenTextArea.setVisible(true);
+            splashScreenTextArea.setImage(scoresLayer);
         });
-        legalButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                splashScreenTextArea.setImage(legalLayer);
-            }
+        legalButton.setOnAction((ActionEvent event) -> {
+            splashScreenTextArea.setImage(legalLayer);
         });
-        
+
         gamePlayLoop = new GamePlayLoop();
         gamePlayLoop.start();
 
@@ -80,7 +74,63 @@ public class InvinciBagel extends Application {
 
     private void createSplashScreenNodes() {
         root = new StackPane();
-        scene = new Scene(root, 640, 400);
+        scene = new Scene(root, WIDTH, HEIGHT, Color.WHITE);
+        scene.setOnKeyPressed((KeyEvent event) -> {
+            switch (event.getCode()) {
+                case UP:
+                    up = true;
+                    break;
+                case DOWN:
+                    down = true;
+                    break;
+                case LEFT:
+                    left = true;
+                    break;
+                case RIGHT:
+                    right = true;
+                    break;
+                case W:
+                    up = true;
+                    break;
+                case S:
+                    down = true;
+                    break;
+                case A:
+                    left = true;
+                    break;
+                case D:
+                    right = true;
+                    break;
+            }
+        });
+        scene.setOnKeyReleased((KeyEvent event) -> {
+            switch (event.getCode()) {
+                case UP:
+                    up = false;
+                    break;
+                case DOWN:
+                    down = false;
+                    break;
+                case LEFT:
+                    left = false;
+                    break;
+                case RIGHT:
+                    right = false;
+                    break;
+                case W:
+                    up = false;
+                    break;
+                case S:
+                    down = false;
+                    break;
+                case A:
+                    left = false;
+                    break;
+                case D:
+                    right = false;
+                    break;
+            }
+        });
 
         buttonContainer = new HBox(12);
         buttonContainer.setAlignment(Pos.BOTTOM_LEFT);
