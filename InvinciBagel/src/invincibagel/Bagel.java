@@ -5,6 +5,10 @@
  */
 package invincibagel;
 
+import static invincibagel.InvinciBagel.down;
+import static invincibagel.InvinciBagel.left;
+import static invincibagel.InvinciBagel.right;
+import static invincibagel.InvinciBagel.up;
 import javafx.scene.image.Image;
 
 /**
@@ -20,7 +24,20 @@ public class Bagel extends Hero {
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (right) {
+            iX += vX;
+        }
+        if (left) {
+            iX -= vX;
+        }
+        if (down) {
+            iY += vX;
+        }
+        if (up) {
+            iY -= vY;
+        }
+        spriteFrame.setTranslateX(iX);
+        spriteFrame.setTranslateY(iY);
     }
 
     @Override
