@@ -25,19 +25,19 @@ import javafx.stage.Stage;
  */
 public class InvinciBagel extends Application {
 
-    static final double WIDTH = 640, HEIGHT = 400;
-    boolean up, down, right, left;
-    Scene scene;
-    StackPane root;
-    static Bagel iBagel;
-    Image splashScreen, instructionLayer, legalLayer, scoresLayer;
-    Image iB0, iB1, iB2, iB3, iB4, iB5, iB6, iB7, iB8;
-    ImageView splashScreenBackplate, splashScreenTextArea;
-    Button gameButton, helpButton, scoreButton, legalButton;
-    HBox buttonContainer;
-    Insets buttonContainerPadding;
-    GamePlayLoop gamePlayLoop;
-    CastingDirector castDirector;
+    private static final double WIDTH = 640, HEIGHT = 400;
+    private boolean up, down, right, left;
+    private Scene scene;
+    private StackPane root;
+    Bagel iBagel;
+    private Image splashScreen, instructionLayer, legalLayer, scoresLayer;
+    private Image iB0, iB1, iB2, iB3, iB4, iB5, iB6, iB7, iB8;
+    private ImageView splashScreenBackplate, splashScreenTextArea;
+    private Button gameButton, helpButton, scoreButton, legalButton;
+    private HBox buttonContainer;
+    private Insets buttonContainerPadding;
+    private GamePlayLoop gamePlayLoop;
+    private CastingDirector castDirector;
     String cBagel;
 
     @Override
@@ -47,10 +47,6 @@ public class InvinciBagel extends Application {
         scene = new Scene(root, WIDTH, HEIGHT, Color.WHITE);
         primaryStage.setScene(scene);
         primaryStage.show();
-
-        gamePlayLoop = new GamePlayLoop();
-        gamePlayLoop.start();
-
     }
 
     /**
@@ -140,7 +136,7 @@ public class InvinciBagel extends Application {
     }
 
     private void createGameActors() {
-        iBagel = new Bagel(cBagel, 0, 0, iB0, iB1, iB2, iB3, iB4, iB5, iB6,
+        iBagel = new Bagel(this, cBagel, 0, 0, iB0, iB1, iB2, iB3, iB4, iB5, iB6,
                 iB7, iB8);
     }
 
@@ -207,8 +203,40 @@ public class InvinciBagel extends Application {
     }
 
     private void createStartGameLoop() {
-        gamePlayLoop = new GamePlayLoop();
+        gamePlayLoop = new GamePlayLoop(this);
         gamePlayLoop.start();
+    }
+
+    public boolean isUp() {
+        return up;
+    }
+
+    public void setUp(boolean up) {
+        this.up = up;
+    }
+
+    public boolean isDown() {
+        return down;
+    }
+
+    public void setDown(boolean down) {
+        this.down = down;
+    }
+
+    public boolean isRight() {
+        return right;
+    }
+
+    public void setRight(boolean right) {
+        this.right = right;
+    }
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public void setLeft(boolean left) {
+        this.left = left;
     }
 
 }

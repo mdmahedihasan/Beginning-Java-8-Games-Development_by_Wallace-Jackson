@@ -5,30 +5,23 @@
  */
 package invincibagel;
 
-import static invincibagel.InvinciBagel.iBagel;
 import javafx.animation.AnimationTimer;
-import javafx.geometry.Pos;
 
 /**
  *
  * @author mahedi
  */
 public class GamePlayLoop extends AnimationTimer {
-    //Pos location;
+
+    protected InvinciBagel invinciBagel;
+
+    public GamePlayLoop(InvinciBagel iBagel) {
+        invinciBagel = iBagel;
+    }
 
     @Override
     public void handle(long now) {
-        iBagel.update();
-        /*location = InvinciBagel.buttonContainer.getAlignment();
-        if (location == Pos.BOTTOM_LEFT) {
-            InvinciBagel.buttonContainer.setAlignment(Pos.BOTTOM_RIGHT);
-        } else if (location == Pos.BOTTOM_RIGHT) {
-            InvinciBagel.buttonContainer.setAlignment(Pos.TOP_RIGHT);
-        } else if (location == Pos.TOP_RIGHT) {
-            InvinciBagel.buttonContainer.setAlignment(Pos.TOP_LEFT);
-        } else if (location == Pos.TOP_LEFT) {
-            InvinciBagel.buttonContainer.setAlignment(Pos.BOTTOM_LEFT);
-        }*/
+        invinciBagel.iBagel.update();
     }
 
     @Override
