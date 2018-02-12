@@ -30,8 +30,12 @@ public class InvinciBagel extends Application {
     private Scene scene;
     private StackPane root;
     Bagel iBagel;
+    Prop iPR0, iPR1;
+    PropH iPH0;
+    PropV iPV0, iPV1;
+    PropB iPB0;
     private Image splashScreen, instructionLayer, legalLayer, scoresLayer;
-    private Image iB0, iB1, iB2, iB3, iB4, iB5, iB6, iB7, iB8;
+    private Image iB0, iB1, iB2, iB3, iB4, iB5, iB6, iB7, iB8, iP0, iP1;
     private ImageView splashScreenBackplate, splashScreenTextArea;
     private Button gameButton, helpButton, scoreButton, legalButton;
     private HBox buttonContainer;
@@ -129,6 +133,8 @@ public class InvinciBagel extends Application {
         iB6 = new Image("/sprite6.png", 81, 81, true, false, true);
         iB7 = new Image("/sprite7.png", 81, 81, true, false, true);
         iB8 = new Image("/sprite8.png", 81, 81, true, false, true);
+        iP0 = new Image("/prop0.png", 72, 32, true, false, true);
+        iP1 = new Image("/prop1.png", 496, 92, true, false, true);
     }
 
     private void createActorCollisionData() {
@@ -138,15 +144,33 @@ public class InvinciBagel extends Application {
     private void createGameActors() {
         iBagel = new Bagel(this, cBagel, 0, 0, iB0, iB1, iB2, iB3, iB4, iB5, iB6,
                 iB7, iB8);
+        iPR0 = new Prop("M150 0 L75 200 L225 200 Z", 0, 146, iP0);
+        iPR1 = new Prop("M150 0 L75 200 L225 200 Z", 0, -150, iP1);
+        iPH0 = new PropH("M150 0 L75 200 L225 200 Z", 72, 148, iP0);
+        iPV0 = new PropV("M150 0 L75 200 L225 200 Z", 0, 116, iP0);
+        iPV1 = new PropV("M150 0 L75 200 L225 200 Z", 0, -58, iP1);
+        iPB0 = new PropB("M150 0 L75 200 L225 200 Z", 72, 116, iP0);
     }
 
     private void addGameActorNodes() {
         root.getChildren().add(iBagel.spriteFrame);
+        root.getChildren().add(iPR0.spriteFrame);
+        root.getChildren().add(iPR1.spriteFrame);
+        root.getChildren().add(iPH0.spriteFrame);
+        root.getChildren().add(iPV0.spriteFrame);
+        root.getChildren().add(iPV1.spriteFrame);
+        root.getChildren().add(iPB0.spriteFrame);
     }
 
     private void createCastingDirection() {
         castDirector = new CastingDirector();
         castDirector.addCurrentCast(iBagel);
+        castDirector.addCurrentCast(iPR0);
+        castDirector.addCurrentCast(iPR1);
+        castDirector.addCurrentCast(iPH0);
+        castDirector.addCurrentCast(iPV0);
+        castDirector.addCurrentCast(iPV1);
+        castDirector.addCurrentCast(iPB0);
     }
 
     private void createSplashScreenNodes() {
