@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 public class InvinciBagel extends Application {
 
     private static final double WIDTH = 640, HEIGHT = 400;
-    private boolean up, down, right, left;
+    private boolean up, down, right, left, wKey, aKey, sKey, dKey;
     private Scene scene;
     private StackPane root;
     Bagel iBagel;
@@ -72,16 +72,16 @@ public class InvinciBagel extends Application {
                     right = true;
                     break;
                 case W:
-                    up = true;
+                    wKey = true;
                     break;
                 case S:
-                    down = true;
+                    sKey = true;
                     break;
                 case A:
-                    left = true;
+                    aKey = true;
                     break;
                 case D:
-                    right = true;
+                    dKey = true;
                     break;
             }
         });
@@ -100,16 +100,16 @@ public class InvinciBagel extends Application {
                     right = false;
                     break;
                 case W:
-                    up = false;
+                    wKey = false;
                     break;
                 case S:
-                    down = false;
+                    sKey = false;
                     break;
                 case A:
-                    left = false;
+                    aKey = false;
                     break;
                 case D:
-                    right = false;
+                    dKey = false;
                     break;
             }
         });
@@ -237,6 +237,38 @@ public class InvinciBagel extends Application {
 
     public void setLeft(boolean left) {
         this.left = left;
+    }
+
+    public boolean iswKey() {
+        return wKey;
+    }
+
+    public void setwKey(boolean wKey) {
+        this.wKey = wKey;
+    }
+
+    public boolean isaKey() {
+        return aKey;
+    }
+
+    public void setaKey(boolean aKey) {
+        this.aKey = aKey;
+    }
+
+    public boolean issKey() {
+        return sKey;
+    }
+
+    public void setsKey(boolean sKey) {
+        this.sKey = sKey;
+    }
+
+    public boolean isdKey() {
+        return dKey;
+    }
+
+    public void setdKey(boolean dKey) {
+        this.dKey = dKey;
     }
 
 }

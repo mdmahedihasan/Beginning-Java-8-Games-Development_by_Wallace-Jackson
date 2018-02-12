@@ -22,6 +22,9 @@ public class Bagel extends Hero {
     protected static final double leftBoundary = -(WIDTH / 2 - SPRITE_PIXELS_X / 2);
     protected static final double bottomBoundary = HEIGHT / 2 - SPRITE_PIXELS_Y / 2;
     protected static final double topBoundary = -(HEIGHT / 2 - SPRITE_PIXELS_Y / 2);
+    boolean animator = false;
+    int framecounter = 0;
+    int runningspeed = 6;
 
     public Bagel(InvinciBagel iBagel, String SVGdata, double xLocation,
             double yLocation, Image... spriteCels) {
@@ -33,6 +36,7 @@ public class Bagel extends Hero {
     public void update() {
         setXYLocation();
         setBoundaries();
+        setImageState();
         moveInvinciBagel(iX, iY);
     }
 
@@ -63,6 +67,69 @@ public class Bagel extends Hero {
         }
         if (iY <= topBoundary) {
             iY = topBoundary;
+        }
+    }
+
+    private void setImageState() {
+        if (!invinciBagel.isRight() && !invinciBagel.isLeft()
+                && !invinciBagel.isDown() && !invinciBagel.isUp()) {
+            spriteFrame.setImage(imageStates.get(0));
+            animator = false;
+            framecounter = 0;
+        }
+        if (invinciBagel.isRight()) {
+            spriteFrame.setScaleX(1);
+            this.setIsFlipH(false);
+            if (!animator && (!invinciBagel.isDown() && !invinciBagel.isUp())) {
+                spriteFrame.setImage(imageStates.get(1));
+                if (framecounter >= runningspeed) {
+                    animator = true;
+                    framecounter = 0;
+                } else {
+                    framecounter += 1;
+                }
+            } else if (animator) {
+                spriteFrame.setImage(imageStates.get(2));
+                if (framecounter >= runningspeed) {
+                    animator = false;
+                    framecounter = 0;
+                } else {
+                    framecounter += 1;
+                }
+            }
+        }
+        if (invinciBagel.isLeft()) {
+            spriteFrame.setScaleX(-1);
+            this.setIsFlipH(true);
+            if (!animator && (!invinciBagel.isDown() && !invinciBagel.isUp())) {
+                spriteFrame.setImage(imageStates.get(1));
+                if (framecounter >= runningspeed) {
+                    animator = true;
+                    framecounter = 0;
+                } else {
+                    framecounter += 1;
+                }
+            } else if (animator) {
+                spriteFrame.setImage(imageStates.get(2));
+                if (framecounter >= runningspeed) {
+                    animator = false;
+                    framecounter = 0;
+                } else {
+                    framecounter += 1;
+                }
+            }
+        }
+        if (invinciBagel.isDown()) {
+            spriteFrame.setImage(imageStates.get(6));
+        }
+        if (invinciBagel.isUp()) {
+            spriteFrame.setImage(imageStates.get(4));
+        }
+        if (invinciBagel.iswKey()) {
+            spriteFrame.setImage(imageStates.get(5));
+        }
+        if (invinciBagel.issKey()) {
+            spriteFrame.setImage(imageStates.get(8));
         }
     }
 
