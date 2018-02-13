@@ -5,6 +5,7 @@
  */
 package invincibagel;
 
+import java.net.URL;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -16,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -25,7 +27,9 @@ import javafx.stage.Stage;
  */
 public class InvinciBagel extends Application {
 
-    private static final double WIDTH = 640, HEIGHT = 400;
+    static final double WIDTH = 640, HEIGHT = 400;
+    private AudioClip iSound0, iSound1, iSound2, iSound3, iSound4, iSound5;
+    private URL iAudioFile0, iAudioFile1, iAudioFile2, iAudioFile3, iAudioFile4, iAudioFile5;
     private boolean up, down, right, left, wKey, aKey, sKey, dKey;
     private Scene scene;
     private StackPane root;
@@ -51,6 +55,16 @@ public class InvinciBagel extends Application {
         scene = new Scene(root, WIDTH, HEIGHT, Color.WHITE);
         primaryStage.setScene(scene);
         primaryStage.show();
+        createSceneEventHandling();
+        loadAudioAssets();
+        loadImageAssets();
+        createActorCollisionData();
+        createGameActors();
+        addGameActorNodes();
+        createCastingDirection();
+        createSplashScreenNodes();
+        addNodesToStackPane();
+        createStartGameLoop();
     }
 
     /**
@@ -117,6 +131,22 @@ public class InvinciBagel extends Application {
                     break;
             }
         });
+    }
+
+    private void loadAudioAssets() {
+        iAudioFile0 = getClass().getResource("/leftmono.wav");
+        iAudioFile1 = getClass().getResource("/rightmono.wav");
+        iAudioFile2 = getClass().getResource("/upmono.wav");
+        iAudioFile3 = getClass().getResource("/downmono.wav");
+        iAudioFile4 = getClass().getResource("/wmono.wav");
+        iAudioFile5 = getClass().getResource("/smono.wav");
+        iSound0 = new AudioClip(iAudioFile0.toString());
+        iSound1 = new AudioClip(iAudioFile1.toString());
+        iSound2 = new AudioClip(iAudioFile2.toString());
+        iSound3 = new AudioClip(iAudioFile3.toString());
+        iSound3 = new AudioClip(iAudioFile4.toString());
+        iSound4 = new AudioClip(iAudioFile4.toString());
+        iSound5 = new AudioClip(iAudioFile5.toString());
     }
 
     private void loadImageAssets() {
@@ -293,6 +323,30 @@ public class InvinciBagel extends Application {
 
     public void setdKey(boolean dKey) {
         this.dKey = dKey;
+    }
+
+    public void playiSound0() {
+        this.iSound0.play();
+    }
+
+    public void playiSound1() {
+        this.iSound1.play();
+    }
+
+    public void playiSound2() {
+        this.iSound2.play();
+    }
+
+    public void playiSound3() {
+        this.iSound3.play();
+    }
+
+    public void playiSound4() {
+        this.iSound4.play();
+    }
+
+    public void playiSound5() {
+        this.iSound5.play();
     }
 
 }
