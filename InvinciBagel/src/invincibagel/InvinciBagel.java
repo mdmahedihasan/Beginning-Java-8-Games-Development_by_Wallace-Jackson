@@ -10,13 +10,13 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -32,7 +32,7 @@ public class InvinciBagel extends Application {
     private URL iAudioFile0, iAudioFile1, iAudioFile2, iAudioFile3, iAudioFile4, iAudioFile5;
     private boolean up, down, right, left, wKey, aKey, sKey, dKey;
     private Scene scene;
-    private StackPane root;
+    Group root;
     Bagel iBagel;
     Prop iPR0, iPR1;
     PropH iPH0;
@@ -45,13 +45,13 @@ public class InvinciBagel extends Application {
     private HBox buttonContainer;
     private Insets buttonContainerPadding;
     private GamePlayLoop gamePlayLoop;
-    private CastingDirector castDirector;
+    CastingDirector castDirector;
     String cBagel;
 
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("InvinciBagel");
-        root = new StackPane();
+        root = new Group();
         scene = new Scene(root, WIDTH, HEIGHT, Color.WHITE);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -172,9 +172,11 @@ public class InvinciBagel extends Application {
     }
 
     private void createGameActors() {
-        iBagel = new Bagel(this, cBagel, 0, 0, iB0, iB1, iB2, iB3, iB4, iB5, iB6,
-                iB7, iB8);
-        iPR0 = new Prop("M150 0 L75 200 L225 200 Z", 0, 146, iP0);
+        iBagel = new Bagel(this,
+                "M57,10 L46,25 30,26 30,41 18,41 18,44 27,56 37,57 35,75 39,81 43,81 45,53 54,40 63,43 72,26 Z",
+                WIDTH / 2, HEIGHT / 2, iB0, iB1, iB2, iB3, iB4, iB5, iB6, iB7, iB8);
+        //iPR0 = new Prop("M150 0 L75 200 L225 200 Z", 0, 146, iP0);
+        iPR0 = new Prop("M0 0 L0 32 72 32 72 0 Z", 0, 148, iP0);
         iPR1 = new Prop("M150 0 L75 200 L225 200 Z", 0, -150, iP1);
         iPH0 = new PropH("M150 0 L75 200 L225 200 Z", 72, 148, iP0);
         iPV0 = new PropV("M150 0 L75 200 L225 200 Z", 0, 116, iP0);
@@ -185,28 +187,29 @@ public class InvinciBagel extends Application {
     private void addGameActorNodes() {
         root.getChildren().add(iBagel.spriteFrame);
         root.getChildren().add(iPR0.spriteFrame);
-        root.getChildren().add(iPR1.spriteFrame);
+        //root.getChildren().add(iPR1.spriteFrame);
         root.getChildren().add(iPH0.spriteFrame);
         root.getChildren().add(iPV0.spriteFrame);
-        root.getChildren().add(iPV1.spriteFrame);
+        //root.getChildren().add(iPV1.spriteFrame);
         root.getChildren().add(iPB0.spriteFrame);
     }
 
     private void createCastingDirection() {
         castDirector = new CastingDirector();
-        castDirector.addCurrentCast(iBagel);
+        //castDirector.addCurrentCast(iBagel);
         castDirector.addCurrentCast(iPR0);
-        castDirector.addCurrentCast(iPR1);
+        //castDirector.addCurrentCast(iPR1);
         castDirector.addCurrentCast(iPH0);
         castDirector.addCurrentCast(iPV0);
-        castDirector.addCurrentCast(iPV1);
+        //castDirector.addCurrentCast(iPV1);
         castDirector.addCurrentCast(iPB0);
     }
 
     private void createSplashScreenNodes() {
 
         buttonContainer = new HBox(12);
-        buttonContainer.setAlignment(Pos.BOTTOM_LEFT);
+        //buttonContainer.setAlignment(Pos.BOTTOM_LEFT);
+        buttonContainer.setLayoutX(365);
         buttonContainerPadding = new Insets(0, 0, 10, 16);
         buttonContainer.setPadding(buttonContainerPadding);
 
